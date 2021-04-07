@@ -10,10 +10,12 @@ def main(keyfile):
 
     cipher = Fernet(key)
 
-    data = input("data>> ")
-    enc = cipher.encrypt(data.encode("utf-8"))
+    with open("latest", "rb") as f:
+        data = f.read()
 
-    with open("latest.enc", "wb") as f:
+    enc = cipher.encrypt(data)
+
+    with open("latest", "wb") as f:
         f.write(enc)
 
     print("[+] Done.")
